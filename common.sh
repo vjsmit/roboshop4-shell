@@ -8,6 +8,7 @@ user_id=$(id -u)
 
 if [ $user_id -ne 0 ]; then
     echo -e "\e[31mRoot permission required to proceed\e[0m"
+    exit 1
 fi
 
 func_StatCheck() {
