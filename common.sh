@@ -73,7 +73,7 @@ func_nodejs() {
   func_systemd
 }
 
-func_mysql(){
+func_mongodb(){
   echo -e "${color}Setup mongodb repo${nocolor}"
   cp /home/centos/roboshop4-shell/mongo.repo /etc/yum.repos.d/mongo.repo    &>>${logfile}
   func_StatCheck $?
@@ -85,5 +85,31 @@ func_mysql(){
   echo -e "${color}Load schema${nocolor}"
   mongo --host mongodb-dev.smitdevops.online </app/schema/${component}.js   &>>${logfile}
   func_StatCheck $?
+}
+
+func_mysql() {
+  echo -e "${color}Install Mysql Client${nocolor}"
+  dnf install mysql -y
+
+  echo -e "${color}Load Schema${nocolor}"
+  mysql -h mysql-dev.smitdevops.online -uroot -p${mysql_pwd} </app/schema/${component}.sql
+}
+
+func_maven() {
+  echo -e "${color}Install Maven${nocolor}"
+  dnf install maven -y    &>>${logfile}
+  func_StatCheck $?
+
+  func_AppPresetup
+
+  echo -e "${color}Download App Dependencies${nocolor}"
+  mvn clean package   &>>${logfile}
+  mv target/${component}-1.0.jar ${component}.jar   &>>${logfile}
+  func_StatCheck $?
+
+  func_mysql
+
+  func_systemd
+
 }
 

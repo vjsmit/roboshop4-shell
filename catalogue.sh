@@ -4,4 +4,4 @@ component=catalogue
 
 func_nodejs
 
-func_mysql
+func_mongodb
