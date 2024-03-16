@@ -115,7 +115,7 @@ func_maven() {
 
 }
 
-func_pyhton() {
+func_python() {
   echo -e "${color}Install python${nocolor}"
   dnf install python36 gcc python3-devel -y   &>>${logfile}
   func_StatCheck $?
