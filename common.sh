@@ -18,6 +18,7 @@ func_StatCheck() {
     echo -e "\e[31mFAILURE\e[0m"
   fi
 }
+
 func_AppPresetup() {
   echo -e "${color}Add App user${nocolor}"
   id roboshop   &>>${logfile}
@@ -40,6 +41,7 @@ func_AppPresetup() {
   unzip /tmp/${component}.zip    &>>${logfile}
   func_StatCheck $?
 }
+
 func_systemd() {
   echo -e "${color}Setup ${component} service${nocolor}"
   cp /home/centos/roboshop4-shell/${component}.service /etc/systemd/system/${component}.service   &>>${logfile}
@@ -51,6 +53,7 @@ func_systemd() {
   systemctl restart ${component}   &>>${logfile}
   func_StatCheck $?
 }
+
 func_mysql(){
   echo -e "${color}Setup mongodb repo${nocolor}"
   cp /home/centos/roboshop4-shell/mongo.repo /etc/yum.repos.d/mongo.repo    &>>${logfile}
@@ -61,7 +64,7 @@ func_mysql(){
   func_StatCheck $?
 
   echo -e "${color}Load schema${nocolor}"
-  mongo --host MONGODB-SERVER-IPADDRESS </app/schema/${component}.js   &>>${logfile}
+  mongo --host mongodb-dev.smitdevops.online </app/schema/${component}.js   &>>${logfile}
   func_StatCheck $?
 }
 
