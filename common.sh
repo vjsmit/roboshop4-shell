@@ -1,6 +1,6 @@
 echo -e "${color}${nocolor}"
-color="\e[1;34m"
-nocolor="\e[1;0m"
+color="\e[34m"
+nocolor="\e[0m"
 
 logfile="/tmp/roboshop.log"
 
@@ -13,9 +13,9 @@ fi
 
 func_StatCheck() {
   if [ $1 -eq 0 ]; then
-    echo -e "\e[1;32mSUCCESS\e[0m"
+    echo -e "\e[32mSUCCESS\e[0m"
   else
-    echo -e "\e[1;31mFAILURE\e[0m"
+    echo -e "\e[31mFAILURE\e[0m"
   fi
 }
 
