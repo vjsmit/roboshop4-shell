@@ -47,6 +47,8 @@ func_systemd() {
   cp /home/centos/roboshop4-shell/${component}.service /etc/systemd/system/${component}.service   &>>${logfile}
   func_StatCheck $?
 
+  sed -i -e "s/roboshop_pwd/${roboshop_pwd}" /etc/systemd/system/${component}.service   &>>${logfile}
+
   echo -e "${color}Start ${component} service${nocolor}"
   systemctl daemon-reload   &>>${logfile}
   systemctl enable ${component}    &>>${logfile}
@@ -113,3 +115,16 @@ func_maven() {
 
 }
 
+func_pyhton() {
+  echo -e "${color}Install python${nocolor}"
+  dnf install python36 gcc python3-devel -y   &>>${logfile}
+  func_StatCheck $?
+
+  func_AppPresetup
+
+  echo -e "${color}Download Dependencies${nocolor}"
+  pip3.6 install -r requirements.txt    &>>${logfile}
+  func_StatCheck $?
+
+  func_systemd
+}
