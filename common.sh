@@ -47,7 +47,8 @@ func_systemd() {
   cp /home/centos/roboshop4-shell/${component}.service /etc/systemd/system/${component}.service   &>>${logfile}
   func_StatCheck $?
 
-  sed -i -e "s/roboshop_pwd/${roboshop_pwd}" /etc/systemd/system/${component}.service   &>>${logfile}
+  sed -i -e "s/roboshop_pwd/${roboshop_pwd}/" /etc/systemd/system/${component}.service   &>>${logfile}
+
 
   echo -e "${color}Start ${component} service${nocolor}"
   systemctl daemon-reload   &>>${logfile}
