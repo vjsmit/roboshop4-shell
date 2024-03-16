@@ -54,20 +54,6 @@ func_systemd() {
   func_StatCheck $?
 }
 
-func_mysql(){
-  echo -e "${color}Setup mongodb repo${nocolor}"
-  cp /home/centos/roboshop4-shell/mongo.repo /etc/yum.repos.d/mongo.repo    &>>${logfile}
-  func_StatCheck $?
-
-  echo -e "${color}Install mongodb client${nocolor}"
-  dnf install mongodb-org-shell -y    &>>${logfile}
-  func_StatCheck $?
-
-  echo -e "${color}Load schema${nocolor}"
-  mongo --host mongodb-dev.smitdevops.online </app/schema/${component}.js   &>>${logfile}
-  func_StatCheck $?
-}
-
 func_nodejs() {
   echo -e "${color}Enable 18 version ${nocolor}"
   dnf module disable nodejs -y    &>>${logfile}
@@ -85,5 +71,19 @@ func_nodejs() {
   func_StatCheck $?
   
   func_systemd
+}
+
+func_mysql(){
+  echo -e "${color}Setup mongodb repo${nocolor}"
+  cp /home/centos/roboshop4-shell/mongo.repo /etc/yum.repos.d/mongo.repo    &>>${logfile}
+  func_StatCheck $?
+
+  echo -e "${color}Install mongodb client${nocolor}"
+  dnf install mongodb-org-shell -y    &>>${logfile}
+  func_StatCheck $?
+
+  echo -e "${color}Load schema${nocolor}"
+  mongo --host mongodb-dev.smitdevops.online </app/schema/${component}.js   &>>${logfile}
+  func_StatCheck $?
 }
 
