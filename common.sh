@@ -89,10 +89,10 @@ func_mongodb(){
 
 func_mysql() {
   echo -e "${color}Install Mysql Client${nocolor}"
-  dnf install mysql -y
+  dnf install mysql -y    &>>${logfile}
 
   echo -e "${color}Load Schema${nocolor}"
-  mysql -h mysql-dev.smitdevops.online -uroot -p${mysql_pwd} </app/schema/${component}.sql
+  mysql -h mysql-dev.smitdevops.online -uroot -p${mysql_pwd} </app/schema/${component}.sql    &>>${logfile}
 }
 
 func_maven() {
