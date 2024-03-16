@@ -85,7 +85,5 @@ func_nodejs() {
   func_StatCheck $?
   
   func_systemd
-
-  func_mysql
 }
 
