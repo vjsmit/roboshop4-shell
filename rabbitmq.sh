@@ -3,6 +3,7 @@ rabbitmq_pwd=$1
 
 if [ -z "$rabbitmq_pwd" ]; then
   echo -e "\e[31mProvide rabbitmq pwd to proceed\e[0m"
+  exit 1
 fi
 
 echo -e "${color}Setup erlang repo${nocolor}"
