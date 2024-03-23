@@ -76,7 +76,7 @@ func_nodejs() {
   func_systemd
 }
 
-func_mongodb(){
+func_mongodb() {
   echo -e "${color}Setup mongodb repo${nocolor}"
   cp /home/centos/roboshop4-shell/mongo.repo /etc/yum.repos.d/mongo.repo    &>>${logfile}
   func_StatCheck $?
@@ -113,7 +113,6 @@ func_maven() {
   func_mysql
 
   func_systemd
-
 }
 
 func_python() {
